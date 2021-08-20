@@ -1,0 +1,17 @@
+.form__button {
+  padding: 0;
+  width: 120px;
+  height: 31px;
+  font-size: 16px;
+  font-weight: 300;
+  text-transform: uppercase;
+  line-height: 14px;
+  color: #242424;
+  border: none;
+  border-left: 1px solid #242424;
+  border-bottom: 1px solid #242424;
+  text-align: left;
+  background: none;
+  display: flex;
+  align-items: center;
+}
