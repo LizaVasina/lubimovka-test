@@ -1,4 +1,3 @@
-// import './App.css';
 import React from 'react';
 import PlayCard from './PlayCard';
 import arrowRight from '../images/arrowRight.svg';
