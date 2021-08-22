@@ -17,11 +17,28 @@ function App() {
           </div>
         </form>
 
-        <div class="results">
-          <div class="results__plays">
-            <PlayCard />
+        <div className="results">
+          <div className="results__plays">
+            <PlayCard
+              title="Август 1999 или Никита, любовь и голуби"
+              lastName="Бжожовский"
+              firstName="Теодор"
+              city="Санкт-Петербург"
+              year="2020" />
+            <PlayCard 
+              title="Августина и Степан"
+              lastName="Пастернак"
+              firstName="Ангелина"
+              city="Санкт-Петербург"
+              year="2020"/>
+            <PlayCard 
+              title="По ту сторону августа"
+              lastName="Евдокимов"
+              firstName="Платон"
+              city="Москва"
+              year="2017"/>
           </div>
-          <div class="results__authors">
+          <div className="results__authors">
 
           </div>
         </div>

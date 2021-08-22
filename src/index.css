@@ -3,9 +3,23 @@
 
 @import url(./blocks/page/page.css);
 
+/* form */
 @import url(./blocks/form/form.css);
 @import url(./blocks/form/__result-text/form__result-text.css);
 @import url(./blocks/form/__container/form__container.css);
 @import url(./blocks/form/__input/form__input.css);
 @import url(./blocks/form/__button/form__button.css);
 @import url(./blocks/form/__arrow/form__arrow.css);
+
+/* results */
+@import url(./blocks/results/results.css);
+@import url(./blocks/results/__plays/results__plays.css);
+@import url(./blocks/results/__authors/results__authors.css);
+
+/* playcard */
+@import url(./blocks/playcard/playcard.css);
+@import url(./blocks/playcard/__cover/playcard__cover.css);
+@import url(./blocks/playcard/__title/playcard__title.css);
+@import url(./blocks/playcard/__author-name/playcard__author-name.css);
+@import url(./blocks/playcard/__author-name/_last/playcard__author-name_last.css);
+@import url(./blocks/playcard/__info/playcard__info.css);
