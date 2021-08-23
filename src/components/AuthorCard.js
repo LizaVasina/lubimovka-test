@@ -1,19 +1,6 @@
 import React from 'react';
 
 function AuthorCard(props) {
-    const names = [{
-        author_firstName: "Лиза",
-        author_lastName: "Васина",
-    },
-    {
-        author_firstName: "Лизуся",
-        author_lastName: "Васина",
-    },
-    {
-        author_firstName: "Лизя",
-        author_lastName: "Васина",
-    }];
-
     return (
         <div className="authors">
             <h2 className="authors__letter">{props.item.author_lastName.length !== 0 ? props.item.letter : ''}</h2>

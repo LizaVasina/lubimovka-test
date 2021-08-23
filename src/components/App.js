@@ -7,11 +7,11 @@ import AuthorCard from './AuthorCard';
 function App() {
   const [inputElement, setInputElement] = React.useState('');
   const [searchValue, setSearchValue] = React.useState(''); // значение, по которому будем искать
-  const [dataArray, setDataArray] = React.useState(data.result);
+  const dataArray = data.result;
   const [searchMessage, setSearchMessage] = React.useState('Поиск');
   const [playsArray, setPlaysArray] = React.useState([]);
   const [authorsArray, setAuthorsArray] = React.useState([]);
-
+  
   function handleChange(evt) {
     setSearchValue(evt.target.value.toLowerCase());
     setInputElement(evt.target.value);
