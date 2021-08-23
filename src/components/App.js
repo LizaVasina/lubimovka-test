@@ -52,9 +52,19 @@ function App() {
 
         if (matchedLetter) {
           testArray.forEach(newItem => {
+            let matchedLastName = false;
             if (play.author_lastName.charAt(0) === newItem.letter) {
-              newItem.author_lastName.push(play.author_lastName);
-              newItem.author_firstName.push(play.author_firstName);
+              for(let i = 0; i <= newItem.author_lastName.length; i++) {
+                if (newItem.author_lastName[i] === play.author_lastName) {
+                  matchedLastName = true;
+                }
+              }
+
+              if (!matchedLastName) {
+                newItem.author_lastName.push(play.author_lastName);
+                newItem.author_firstName.push(play.author_firstName);
+              }
+              
             }
           })
         } else {
