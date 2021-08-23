@@ -23,3 +23,8 @@
 @import url(./blocks/playcard/__author-name/playcard__author-name.css);
 @import url(./blocks/playcard/__author-name/_last/playcard__author-name_last.css);
 @import url(./blocks/playcard/__info/playcard__info.css);
+
+/* authors */
+@import url(./blocks/authors/authors.css);
+@import url(./blocks/authors/__letter/author__letter.css);
+@import url(./blocks/authors/__name/author__name.css);

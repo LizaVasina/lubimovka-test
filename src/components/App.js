@@ -1,7 +1,8 @@
 import React from 'react';
 import PlayCard from './PlayCard';
 import arrowRight from '../images/arrowRight.svg';
-import data from '../data.json';
+import data from '../data/data.json';
+import AuthorCard from './AuthorCard';
 
 function App() {
   const [inputElement, setInputElement] = React.useState('');
@@ -9,6 +10,7 @@ function App() {
   const [dataArray, setDataArray] = React.useState(data.result);
   const [searchMessage, setSearchMessage] = React.useState('Поиск');
   const [playsArray, setPlaysArray] = React.useState([]);
+  const [authorsArray, setAuthorsArray] = React.useState([]);
 
   function handleChange(evt) {
     setSearchValue(evt.target.value.toLowerCase());
@@ -28,6 +30,46 @@ function App() {
     return setUpdates;
   }
 
+  function getAuthors() {
+    const setUpdates = [];
+    const testArray = [];
+    let matchedLetter = false;
+    dataArray.forEach(play => {
+      if (play.author_firstName.toLowerCase().includes(searchValue) || play.author_lastName.toLowerCase().includes(searchValue)) {
+          
+        setUpdates.push(play);
+      }
+    })
+
+    if (setUpdates.length !== 0) {
+      setUpdates.forEach(play => {
+
+        testArray.forEach(newItem => {
+          if (play.author_lastName.charAt(0) === newItem.letter) {
+            matchedLetter = true;
+          }
+        })
+
+        if (matchedLetter) {
+          testArray.forEach(newItem => {
+            if (play.author_lastName.charAt(0) === newItem.letter) {
+              newItem.author_lastName.push(play.author_lastName);
+              newItem.author_firstName.push(play.author_firstName);
+            }
+          })
+        } else {
+          testArray.push({
+            letter: play.author_lastName.charAt(0),
+            author_lastName: [play.author_lastName],
+            author_firstName: [play.author_firstName],
+          })
+        }
+      })
+    }
+
+    return testArray;
+  }
+
   function handleSubmit(evt) {
     evt.preventDefault();
     setInputElement('');
@@ -37,8 +79,9 @@ function App() {
     }
 
     setPlaysArray(getPlays());
+    setAuthorsArray(getAuthors());
     
-    if (getPlays().length === 0) {
+    if (getPlays().length === 0 && getAuthors().length === 0) {
       setSearchMessage(`По запросу "${searchValue}" мы ничего не нашли`);
     } else {
       setSearchMessage(`По запросу "${searchValue}" мы нашли`);
@@ -68,11 +111,13 @@ function App() {
               firstName={play.author_firstName}
               lastName={play.author_lastName}
               city={play.city}
-              year={play.year}/>)
+              year={play.year} />)
             }) : []}
           </div>
           <div className="results__authors">
-
+            {authorsArray.length !== 0 ? authorsArray.map((item) => {
+              return (<AuthorCard item={item}/>)
+            }) : []}
           </div>
         </div>
     </div>

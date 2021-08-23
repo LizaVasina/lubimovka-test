@@ -1,0 +1,10 @@
+.authors__name {
+  font-size: 20px;
+  font-weight: 300;
+  line-height: 28px;
+  margin: 0 0 14px;
+}
+
+.authors__name:last-of-type {
+  margin: 0;
+}
