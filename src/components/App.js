@@ -4,7 +4,7 @@ import arrowRight from '../images/arrowRight.svg';
 import data from '../data.json';
 
 function App() {
-  const inputElement = document.querySelector('.form__input');
+  const [inputElement, setInputElement] = React.useState('');
   const [searchValue, setSearchValue] = React.useState(''); // значение, по которому будем искать
   const [dataArray, setDataArray] = React.useState(data.result);
   const [searchMessage, setSearchMessage] = React.useState('Поиск');
@@ -12,6 +12,7 @@ function App() {
 
   function handleChange(evt) {
     setSearchValue(evt.target.value.toLowerCase());
+    setInputElement(evt.target.value);
   }
 
 
@@ -29,7 +30,7 @@ function App() {
 
   function handleSubmit(evt) {
     evt.preventDefault();
-    inputElement.value = '';
+    setInputElement('');
 
     if (searchValue === '') {
       return;
@@ -51,7 +52,7 @@ function App() {
         <form className="form" onSubmit={handleSubmit}>
           <p className="form__result-text">{searchMessage}</p>
           <div className="form__container">
-            <input className="form__input" onChange={handleChange} placeholder="Введите свой запрос сюда" required></input>
+            <input className="form__input" value={inputElement} onChange={handleChange} placeholder="Введите свой запрос сюда" required></input>
             <button type="submit" className="form__button">
               <img className="form__arrow" src={arrowRight} alt="Изображение стрелки, направленной вправо, на кнопке"/>
               Искать
