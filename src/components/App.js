@@ -67,6 +67,16 @@ function App() {
       })
     }
 
+    testArray.sort(function (a, b) {
+      if (a.letter > b.letter) {
+        return 1;
+      }
+      if (a.letter < b.letter) {
+        return -1;
+      }
+
+      return 0;
+    });
     return testArray;
   }
 
