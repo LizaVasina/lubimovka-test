@@ -2,4 +2,4 @@
 
 Выполнила Лиза Васина ⭐️
 
-[Сайтик на Versel лежит тут!](https://lubimovka-test-rose.vercel.app/)
+[Сайтик на Vercel лежит тут!](https://lubimovka-test-rose.vercel.app/)
