@@ -5,20 +5,20 @@ import data from '../data/data.json';
 import AuthorCard from './AuthorCard';
 
 function App() {
-  const [inputElement, setInputElement] = React.useState('');
+  const [inputElement, setInputElement] = React.useState(''); // значение для обнуления инпута
   const [searchValue, setSearchValue] = React.useState(''); // значение, по которому будем искать
-  const dataArray = data.result;
-  const [searchMessage, setSearchMessage] = React.useState('Поиск');
-  const [playsArray, setPlaysArray] = React.useState([]);
-  const [authorsArray, setAuthorsArray] = React.useState([]);
+  const dataArray = data.result; // данные
+  const [searchMessage, setSearchMessage] = React.useState('Поиск'); // сообщение для заголовка страницы
+  const [playsArray, setPlaysArray] = React.useState([]); // массив найденных пьес
+  const [authorsArray, setAuthorsArray] = React.useState([]); // массив найденных авторов
   
-  function handleChange(evt) {
+  function handleChange(evt) { // запоминаем поисковое значение по мере записи в инпут
     setSearchValue(evt.target.value.toLowerCase());
     setInputElement(evt.target.value);
   }
 
 
-  function getPlays() {
+  function getPlays() { // получаем массив пьес
     const setUpdates = [];
     dataArray.forEach(play => {
       if (play.title.toLowerCase().includes(searchValue)) {
@@ -30,11 +30,11 @@ function App() {
     return setUpdates;
   }
 
-  function getAuthors() {
+  function getAuthors() { // получаем массив авторов
     const setUpdates = [];
     const testArray = [];
     let matchedLetter = false;
-    dataArray.forEach(play => {
+    dataArray.forEach(play => { // ищем авторов по поисковому слову
       if (play.author_firstName.toLowerCase().includes(searchValue) || play.author_lastName.toLowerCase().includes(searchValue)) {
           
         setUpdates.push(play);
@@ -44,40 +44,40 @@ function App() {
     if (setUpdates.length !== 0) {
       setUpdates.forEach(play => {
 
-        testArray.forEach(newItem => {
+        testArray.forEach(newItem => { // если нашли совпадение по заглавной букве, то отмечаем это
           if (play.author_lastName.charAt(0) === newItem.letter) {
             matchedLetter = true;
           }
         })
 
         if (matchedLetter) {
-          testArray.forEach(newItem => {
+          testArray.forEach(newItem => { // если такая заглавная буква есть, то новую не создаем, добавляем в ее поля автора
             let matchedLastName = false;
-            if (play.author_lastName.charAt(0) === newItem.letter) {
+            if (play.author_lastName.charAt(0) === newItem.letter) { // отмечаем, если в массиве уже есть такой автор
               for(let i = 0; i <= newItem.author_lastName.length; i++) {
                 if (newItem.author_lastName[i] === play.author_lastName) {
                   matchedLastName = true;
                 }
               }
 
-              if (!matchedLastName) {
+              if (!matchedLastName) { // если автора нет, то добавляем его в массив
                 newItem.author_lastName.push(play.author_lastName);
                 newItem.author_firstName.push(play.author_firstName);
               }
               
             }
           })
-        } else {
+        } else { // если такой заглавной буквы еще нет, то добавляем букву и автора в соответствующие поля
           testArray.push({
-            letter: play.author_lastName.charAt(0),
-            author_lastName: [play.author_lastName],
-            author_firstName: [play.author_firstName],
+            letter: play.author_lastName.charAt(0), // структура элемента массива: заглавная буква
+            author_lastName: [play.author_lastName], // массив с фамилиями авторов
+            author_firstName: [play.author_firstName], // массив с именами авторов
           })
         }
       })
     }
 
-    testArray.sort(function (a, b) {
+    testArray.sort(function (a, b) { // сортируем массив по алфавиту по свойству letter
       if (a.letter > b.letter) {
         return 1;
       }
@@ -87,27 +87,29 @@ function App() {
 
       return 0;
     });
+
     return testArray;
   }
 
-  function handleSubmit(evt) {
+  function handleSubmit(evt) { // обработка сабмита формы
     evt.preventDefault();
-    setInputElement('');
+    setInputElement(''); // обнуляем инпут
 
-    if (searchValue === '') {
+    if (searchValue === '') { // если поискового слова нет, то не выполняем функцию
       return;
     }
 
+    // получаем данные на основе поискового слова
     setPlaysArray(getPlays());
     setAuthorsArray(getAuthors());
     
-    if (getPlays().length === 0 && getAuthors().length === 0) {
+    if (getPlays().length === 0 && getAuthors().length === 0) { // если оба массива пустые, то выводим "ничего не нашли"
       setSearchMessage(`По запросу "${searchValue}" мы ничего не нашли`);
     } else {
       setSearchMessage(`По запросу "${searchValue}" мы нашли`);
     }
     
-    setSearchValue('');
+    setSearchValue(''); // обнуляем поисковое слово в конце обработки формы
   }
 
   return (
